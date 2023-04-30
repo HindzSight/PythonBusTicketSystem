@@ -1,0 +1,7 @@
+cur.execute("""insert into operator (opid,name,address,phone,mail)values({},'{}','{}',{},'{}')""".format(int(opf.get()),namef.get(),addressf.get(),int(phone.get()),mail.get()))
+cur.commit()
+
+res=cur.execute("""select * from bookinghistory where mobileno={}""".format(mobf.get()))
+
+Label(root,text='{}'.format(res[0])).pack()
+Label(root,text='{}'.format(int(res[1]))).pack()

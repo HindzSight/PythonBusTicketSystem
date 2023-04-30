@@ -1,0 +1,55 @@
+create database pythonbus;
+CREATE TABLE  operator  (
+   opid  decimal(10,0) NOT NULL,
+   name  varchar(20) DEFAULT NULL,
+   phone  decimal(10,0) DEFAULT NULL,
+   address  varchar(20) DEFAULT NULL,
+   email  varchar(30) DEFAULT NULL,
+  PRIMARY KEY ( opid ));
+INSERT INTO operator VALUES (1,'Charted Bus',7897897891,'AICTSL Depo, Indore','chartedbuses@charted.com'),(2,'Hans Travels',9876543210,'Hans HQ Jagatpura','hansisjod@gmail.com');
+
+CREATE TABLE  route  (
+   rid  decimal(10,0) NOT NULL,
+   stid  decimal(10,0) NOT NULL,
+   station_name  varchar(15) DEFAULT NULL,
+  PRIMARY KEY ( stid , rid ));
+
+INSERT INTO route VALUES (1,1,'Guna'),(2,1,'Guna'),(1,2,'Indore'),(2,2,'Jaipur');
+
+CREATE TABLE  bus  (
+   busID  decimal(10,0) NOT NULL,
+   bus_type  varchar(10) DEFAULT NULL,
+   bus_opid  decimal(10,0) DEFAULT NULL,
+   capacity  int DEFAULT NULL,
+   fare  int DEFAULT NULL,
+   bus_rid  decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY ( busID ),
+  KEY  fkeyrid  ( bus_rid ),
+  KEY  fkey_opid  ( bus_opid ),
+  CONSTRAINT  fkey_opid  FOREIGN KEY ( bus_opid ) REFERENCES  operator  ( opid ));
+
+INSERT INTO bus VALUES (1,'AC 2X2',1,32,500,1),(2,'AC 3X2',2,48,399,2);
+
+
+CREATE TABLE  runs  (
+   runs_busID  decimal(10,0) DEFAULT NULL,
+   runs_date  date DEFAULT NULL,
+   seat_available  int DEFAULT NULL);
+
+INSERT INTO  runs  VALUES (1,'2022-12-17',32),(2,'2022-12-17',48);
+
+CREATE TABLE  bookinghistory  (
+   Pname  varchar(20) DEFAULT NULL,
+   mobile  decimal(10,0) DEFAULT NULL,
+   age  int DEFAULT NULL,
+   seats  int DEFAULT NULL,
+   from_station  varchar(15) DEFAULT NULL,
+   to_station  varchar(15) DEFAULT NULL,
+   date_booked  date DEFAULT NULL,
+   ref_number  int NOT NULL AUTO_INCREMENT,
+   gender  varchar(7) DEFAULT NULL,
+   boarding_date  date DEFAULT NULL,
+   fare  int DEFAULT NULL,
+   op_name  varchar(20) DEFAULT NULL,
+  PRIMARY KEY ( ref_number ));
+

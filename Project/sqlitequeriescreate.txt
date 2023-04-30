@@ -1,0 +1,9 @@
+create table operator(opid numeric primary key,name varchar(20),phone numeric(10),address varchar(20),email varchar(30));
+
+create table route(rid numeric,stid numeric,station_name varchar(15),primary key(rid,stid));
+
+create table bus(busID numeric primary key,bus_type varchar(20),bus_opid numeric references operator(opid),capacity int,fare int,bus_rid numeric);
+
+create table runs(runs_busID numeric references bus(busID),runs_date date,seat_available int);
+
+create table bookinghistory(Pname varchar(20),mobile numeric(10),age int,seats int,from_station varchar(15),to_station varchar(15),date_booked date,ref_number integer primary key autoincrement,gender varchar(7),boarding_date date,fare int,op_name varchar(20));

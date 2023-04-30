@@ -1,0 +1,17 @@
+create table operator(opid numeric primary key,name varchar(20),phone numeric(10),address varchar(20));
+
+create table bus(busID numeric primary key,bus_type varchar(10),bus_opid numeric references operator(opid),capacity int,fare int,bus_rid numeric);
+
+create table route(rid numeric,stid numeric,station_name varchar(15));
+
+create table runs(runs_busID numeric references bus(busID),runs_date date,seat_available int);
+
+create table bookinghistory(Pname varchar(20),mobile numeric(10),age int,seats int,from_station varchar(15),to_station varchar(15),date_booked date,ref_number int primary key auto_increment,gender varchar(7),boarding_date date,fare int);
+
+select op.operator_name,b.bus_id , st.order_of_city as start_station_order , ed.order_of_city as end_station_order , b.seat_capacity,b.bus_type, b.fare from bus_detail as b, operator_detail as op, running_buses as rb, route as st, route as ed where rb.running_date=%s AND rb.bus_id=b.bus_id AND st.city_name=%s AND ed.city_name=%s AND st.order_of_city<ed.order_of_city AND st.route_id =ed.route_id  AND st.route_id=b.route_id AND  b.operator_id=op.operator_id;",(journey_date,source,destination)
+AND st.route_id=b.route_id and b.bus_id=%s
+select op.name,b.bus_type,r.seat_available,b.capacity,b.fare,b.bus_opid,st.stid as start_st,ed.stid as end_st from operator as op,bus as b,route as st,route as ed,runs as r where r.date={} and st.station_name={} and ed.station_name={} and st.start_st< ed.end_st
+
+dated=dater()
+
+insert into bookinghistory (pname,mobile,seats,from_station,to_station,date_booked,gender,boarding_date,fare)values("{}",{},{},"{}","{}",curdate(),"{}","{}",fare)
